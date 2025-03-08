@@ -1,4 +1,3 @@
-
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/service-worker.js')
     .then(reg => console.log('Service Worker registrado', reg))
@@ -24,6 +23,7 @@ document.getElementById('instalarBtn').addEventListener('click', () => {
         });
     }
 });
+
 
 
 document.addEventListener("DOMContentLoaded", () => {
