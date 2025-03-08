@@ -2,48 +2,20 @@
   "name": "Bloc de Notas",
   "short_name": "Notas",
   "description": "Toma y guarda notas fácilmente en tu navegador",
-  "id": "/",
-  "start_url": "https://martincho0731.github.io/BlocNotas/index.html",
+  "start_url": "/BlocNotas/index.html",
   "display": "standalone",
   "background_color": "#ff9a9e",
   "theme_color": "#ff6b81",
-  "orientation": "portrait",
-
-  "launch_handler": {
-    "client_mode": "auto"
-  },
-
   "icons": [
     {
-      "src": "https://martincho0731.github.io/BlocNotas/icons/icon-192x192.png",
+      "src": "/BlocNotas/icons/icon-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "https://martincho0731.github.io/BlocNotas/icons/icon-512x512.png",
+      "src": "/BlocNotas/icons/icon-512x512.png",
       "sizes": "512x512",
       "type": "image/png"
     }
-  ],
-
-  "screenshots": [
-    {
-      "src": "https://martincho0731.github.io/BlocNotas/screenshots/screenshot1.png",
-      "type": "image/png",
-      "sizes": "1080x1920"
-    },
-    {
-      "src": "https://martincho0731.github.io/BlocNotas/screenshots/screenshot2.png",
-      "type": "image/png",
-      "sizes": "1080x1920"
-    }
-  ],
-
-  "file_handlers": {
-    "text/plain": {
-      "action": "https://martincho0731.github.io/BlocNotas/index.html"
-    }
-  },
-
-  "handle_links": "preferred"
+  ]
 }
