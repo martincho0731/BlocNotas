@@ -1,12 +1,12 @@
 const CACHE_NAME = 'bloc-notas-v1';
 const urlsToCache = [
     '/',
-    '/index.html',
-    '/styles.css',
-    '/script.js',
-    '/manifest.json',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png'
+    '/BlocNotas/index.html',
+    '/BlocNotas/styles.css',
+    '/BlocNotas/script.js',
+    '/BlocNotas/manifest.json',
+    '/BlocNotas/icons/icon-192x192.png',
+    '/BlocNotas/icons/icon-512x512.png'
 ];
 
 self.addEventListener('install', event => {
@@ -15,6 +15,7 @@ self.addEventListener('install', event => {
             .then(cache => {
                 return cache.addAll(urlsToCache);
             })
+            .catch(err => console.log('Error al cachear archivos:', err))
     );
 });
 
