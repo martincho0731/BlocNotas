@@ -1,31 +1,3 @@
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-    .then(reg => console.log('Service Worker registrado', reg))
-    .catch(err => console.log('Error al registrar el Service Worker', err));
-}
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (event) => {
-    event.preventDefault();
-    deferredPrompt = event;
-    document.getElementById('instalarBtn').style.display = 'block';
-});
-
-document.getElementById('instalarBtn').addEventListener('click', () => {
-    if (deferredPrompt) {
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then((choiceResult) => {
-            if (choiceResult.outcome === 'accepted') {
-                console.log('PWA instalada');
-            } else {
-                console.log('Instalación cancelada');
-            }
-            deferredPrompt = null;
-        });
-    }
-});
-
-
-
 document.addEventListener("DOMContentLoaded", () => {
     const nuevaNotaBtn = document.getElementById("nuevaNota");
     const guardarNotaBtn = document.getElementById("guardarNota");
@@ -34,9 +6,11 @@ document.addEventListener("DOMContentLoaded", () => {
     const app = document.getElementById("app");
     const tituloInput = document.getElementById("titulo");
     const contenidoInput = document.getElementById("contenido");
-
+    const instalarBtn = document.getElementById("instalarBtn");
+    
     let notas = JSON.parse(localStorage.getItem("notas")) || [];
     let notaActual = null;
+    let deferredPrompt;
 
     function mostrarNotas() {
         listaNotas.innerHTML = "";
@@ -95,4 +69,33 @@ document.addEventListener("DOMContentLoaded", () => {
     nuevaNotaBtn.addEventListener("click", nuevaNota);
     guardarNotaBtn.addEventListener("click", guardarNota);
     mostrarNotas();
+
+    // Registrar el Service Worker
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/BlocNotas/service-worker.js')
+        .then(reg => console.log('Service Worker registrado', reg))
+        .catch(err => console.log('Error al registrar el Service Worker', err));
+    }
+
+    // Detectar instalación de PWA
+    window.addEventListener('beforeinstallprompt', (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        instalarBtn.style.display = 'block';
+    });
+
+    instalarBtn.addEventListener('click', () => {
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            deferredPrompt.userChoice.then((choiceResult) => {
+                if (choiceResult.outcome === 'accepted') {
+                    console.log('PWA instalada');
+                } else {
+                    console.log('Instalación cancelada');
+                }
+                deferredPrompt = null;
+                instalarBtn.style.display = 'none';
+            });
+        }
+    });
 });
