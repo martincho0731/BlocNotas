@@ -4,6 +4,26 @@ if ('serviceWorker' in navigator) {
     .then(reg => console.log('Service Worker registrado', reg))
     .catch(err => console.log('Error al registrar el Service Worker', err));
 }
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (event) => {
+    event.preventDefault();
+    deferredPrompt = event;
+    document.getElementById('instalarBtn').style.display = 'block';
+});
+
+document.getElementById('instalarBtn').addEventListener('click', () => {
+    if (deferredPrompt) {
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+                console.log('PWA instalada');
+            } else {
+                console.log('Instalación cancelada');
+            }
+            deferredPrompt = null;
+        });
+    }
+});
 
 
 document.addEventListener("DOMContentLoaded", () => {
